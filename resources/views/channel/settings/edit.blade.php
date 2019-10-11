@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form action="{{route('edit.channel', $channel->slug)}}" method="post">
+                    <form action="{{route('edit.channel', $channel->slug)}}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name" class="">{{ __('Name') }}</label>
 
@@ -55,9 +55,22 @@
                             @enderror
 
                         </div>
+
+                        <div class="form-group">
+                            <label for="image" class="">{{ __('Channel image') }}</label>
+
+                            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+
+                            @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+                        </div>
                         @csrf
                         @method('put')
-                        <button class="btn btn-outline-dark">Submit</button>
+                        <button class="btn btn-outline-dark">Update</button>
                     </form>    
                 </div>
             </div>
