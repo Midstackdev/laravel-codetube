@@ -28,6 +28,13 @@
                                                 @else
                                                     <span>{{ $video->created_at->diffForHumans() }}</span>
                                                 @endif
+                                                <form action="{{route('delete.video', $video->uid)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="{{ route('user.video.edit', $video->uid) }}" class="btn btn-outline-info btn-sm">     Edit
+                                                    </a>
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                                </form>
                                             </div>
                                             <div class="col-sm-6">
                                                 {{ ucfirst($video->visibility) }}
@@ -39,7 +46,8 @@
                             </div>
 
                         @endforeach
-
+                        
+                        {{$videos->links()}}
                     @else
                         <p>You have no videos.</p>
                         

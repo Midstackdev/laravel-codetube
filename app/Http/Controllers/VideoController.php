@@ -15,6 +15,13 @@ class VideoController extends Controller
         return view('video.index', compact('videos'));
     }
 
+    public function edit(Video $video)
+    {
+        $this->authorize('edit', $video);
+
+        return view('video.edit', compact('video'));
+    }
+
     public function store(Request $request)
     {
     	$uid = uniqid(true);
@@ -54,5 +61,14 @@ class VideoController extends Controller
     	}
 
     	return redirect()->back();
+    }
+
+    public function delete(Video $video)
+    {
+        $this->authorize('delete', $video);
+
+        $video->delete();
+
+        return redirect()->back();
     }
 }

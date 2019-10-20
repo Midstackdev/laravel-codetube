@@ -19,4 +19,14 @@ class VideoPolicy
     {
         return $user->id === $video->channel->user_id;
     }
+
+    public function edit(User $user, Video $video)
+    {
+        return $user->id === $video->channel->user_id;
+    }
+
+    public function delete(User $user, Video $video)
+    {
+        return $user->id === $video->channel->user_id;
+    }
 }
