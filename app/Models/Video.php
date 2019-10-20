@@ -32,4 +32,18 @@ class Video extends Model
     {
     	return 'uid';
     }
+
+    public function isProcessed()
+    {
+    	return $this->processed;
+    }
+
+    public function getThumbnail()
+    {
+    	if (!$this->isProcessed()) {
+    		return config('codetube.buckets.videos') . '/default-thumbnail.png';
+    	}
+    	
+    	return config('codetube.buckets.videos') . '/' .$this->video_id. '_1.jpg';
+    }
 }

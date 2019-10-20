@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
+    public function index(Request $request)
+    {
+        $videos = $request->user()->videos()->latest()->paginate(10);
+
+        return view('video.index', compact('videos'));
+    }
+
     public function store(Request $request)
     {
     	$uid = uniqid(true);
