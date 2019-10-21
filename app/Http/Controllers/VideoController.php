@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
+    public function show(Video $video)
+    {
+        return view('video.show', compact('video'));
+    }
+
     public function index(Request $request)
     {
         $videos = $request->user()->videos()->latest()->paginate(10);

@@ -29,4 +29,13 @@ class Channel extends Model
     {
         return $this->hasMany(Video::class);
     }
+
+    public function getImage()
+    {
+        if (!$this->image_filename) {
+            return config('codetube.buckets.images') . '/profile/default.png';
+        }
+        
+        return config('codetube.buckets.images') . '/profile/' . $this->image_filename;
+    }
 }

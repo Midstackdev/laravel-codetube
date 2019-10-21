@@ -31,7 +31,8 @@
                                                 <form action="{{route('delete.video', $video->uid)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('user.video.edit', $video->uid) }}" class="btn btn-outline-info btn-sm">     Edit
+                                                    <a href="{{ route('user.video.edit', $video->uid) }}" class="btn btn-outline-info btn-sm">
+                                                        Edit
                                                     </a>
                                                     <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
                                                 </form>
