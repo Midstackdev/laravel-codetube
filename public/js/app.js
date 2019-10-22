@@ -2508,7 +2508,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      player: null
+      player: null,
+      duration: null
     };
   },
   props: {
@@ -2516,8 +2517,31 @@ __webpack_require__.r(__webpack_exports__);
     videoUrl: null,
     thumbnailUrl: null
   },
+  methods: {
+    hasHitQuotaView: function hasHitQuotaView() {
+      if (!this.duration) {
+        return false;
+      }
+
+      return Math.round(this.player.currentTime()) === Math.round(10 * this.duration / 100);
+    },
+    createView: function createView() {
+      axios.post("/videos/".concat(this.videoUid, "/views"));
+    }
+  },
   mounted: function mounted() {
+    var _this = this;
+
     this.player = Object(video_js__WEBPACK_IMPORTED_MODULE_0__["default"])('video');
+    this.player.on('loadedmetadata', function () {
+      _this.duration = Math.round(_this.player.duration());
+      console.log(_this.duration);
+    });
+    setInterval(function () {
+      if (_this.hasHitQuotaView()) {
+        _this.createView();
+      }
+    }, 1000);
   }
 });
 

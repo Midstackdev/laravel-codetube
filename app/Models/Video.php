@@ -84,4 +84,14 @@ class Video extends Model
     {
         return config('codetube.buckets.videos') . '/' . $this->video_id . '.mp4';
     }
+
+    public function views()
+    {
+        return $this->hasMany(VideoView::class);
+    }
+
+    public function viewCount()
+    {
+        return $this->views->count();
+    }
 }

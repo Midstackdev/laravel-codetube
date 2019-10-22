@@ -34,7 +34,9 @@
                 <div class="card-body">
                     <h4>{{$video->title}}</h4>
                     <div class="float-right">
-                        Video views
+                        <div class="video__views">
+                            {{ $video->viewCount() }} {{ Str::plural('view', $video->viewCount())}}
+                        </div>
                     </div>
 
                     <div class="media">

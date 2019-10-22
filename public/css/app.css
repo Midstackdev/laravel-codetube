@@ -16,6 +16,11 @@
   left: 50%;
 }
 
+.video__views {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
 .vjs-modal-dialog .vjs-modal-dialog-content,
 .video-js .vjs-modal-dialog,
 .vjs-button > .vjs-icon-placeholder:before,
