@@ -19,27 +19,39 @@ class VideoViewController extends Controller
     	if($request->user()) {
     		$lastUserView = $video->views()->latestByUser($request->user())->first();
 
-    		if($this->withinBuffer($lastUserView)) {
+            if(!$lastUserView) {
+                $this->makeVideoViews($request, $video);
+                return;
+            }
+
+    		if(!$this->withinBuffer($lastUserView)) {
+                $this->makeVideoViews($request, $video);
     			return;
     		}
     	}
 
-    	$lastIpView = $video->views()->latestByIp($request->ip());
+    	$lastIpView = $video->views()->latestByIp($request->ip())->first();
 
     	if($this->withinBuffer($lastIpView)) {
     		return;
     	}
 
-    	$video->views()->create([
-    		'user_id' => $request->user() ? $request->user()->id : null, // cannot be null
-    		'ip' => $request->ip()
-    	]);
+    	$this->makeVideoViews($request, $video);
 
     	return response()->json(null, 200);
     }
 
+    protected function makeVideoViews(Request $request, Video $video)
+    {
+        $video->views()->create([
+            'user_id' => $request->user() ? $request->user()->id : null, // cannot be null
+            'ip' => $request->ip()
+        ]);
+    }
+
     protected function withinBuffer($view)
     {
-    	return $view && $view->created_at->diffInSeconds(Carbon::now()) < self::BUFFER;
+        // dd($view->createdAt());
+    	return $view && $view->createdAt() < self::BUFFER;
     }
 }
