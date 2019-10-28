@@ -9,6 +9,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+              <form class="form-inline" action="/search" method="get">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" value="{{ Request::get('q') }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
             <ul class="navbar-nav mr-auto">
 
             </ul>

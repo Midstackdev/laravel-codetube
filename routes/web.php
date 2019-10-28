@@ -13,6 +13,8 @@ Route::get('/videos/{video}', 'VideoController@show')->name('show.video');
 
 Route::post('/videos/{video}/views', 'VideoViewController@create')->name('create.video.view');
 
+Route::get('/search', 'SearchController@index')->name('search.inddex');
+
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
 Route::group(['middleware' => 'auth'], function() {
