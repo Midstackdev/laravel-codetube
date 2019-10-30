@@ -15,6 +15,8 @@ Route::post('/videos/{video}/views', 'VideoViewController@create')->name('create
 
 Route::get('/search', 'SearchController@index')->name('search.inddex');
 
+Route::get('/videos/{video}/votes', 'VideoVoteController@show')->name('video.votes.show');
+
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
 Route::group(['middleware' => 'auth'], function() {
@@ -29,4 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/channel/{channel}/edit', 'ChannelSettingsController@edit');
     Route::put('/channel/{channel}/edit', 'ChannelSettingsController@update')->name('edit.channel');
+
+    Route::post('/videos/{video}/votes', 'VideoVoteController@create')->name('video.votes.create');
+    Route::delete('/videos/{video}/votes', 'VideoVoteController@remove')->name('video.votes.remove');
 });

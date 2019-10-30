@@ -37,6 +37,7 @@
                         <div class="video__views">
                             {{ $video->viewCount() }} {{ Str::plural('view', $video->viewCount())}}
                         </div>
+                        <video-voting video-uid="{{ $video->uid }}"></video-voting>
                     </div>
 
                     <div class="media">

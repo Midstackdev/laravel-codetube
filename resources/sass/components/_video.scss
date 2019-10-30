@@ -18,3 +18,19 @@
 	font-size: 18px;
 	margin-bottom: 10px;
 }
+
+.video__voting {
+	font-size: 14px;
+}
+
+.video__voting-button {
+	color: #636b6f;
+
+	&:hover, &:focus {
+		text-decoration: none;
+	}
+}
+
+.video__voting-button--voted {
+	color: #3097d1;
+}
