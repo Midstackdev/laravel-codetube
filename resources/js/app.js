@@ -8,6 +8,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import pluralize from 'pluralize'
+
+Vue.filter('pluralize', function (value, number) {
+  return pluralize(value, number)
+})
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,6 +28,7 @@ window.Vue = require('vue');
 Vue.component('video-upload', require('./components/VideoUpload.vue').default);
 Vue.component('video-player', require('./components/VideoPlayer.vue').default);
 Vue.component('video-voting', require('./components/VideoVoting.vue').default);
+Vue.component('video-comments', require('./components/VideoComments.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

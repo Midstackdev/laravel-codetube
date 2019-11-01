@@ -23,5 +23,8 @@
         "video.js": "^7.6.5",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "pluralize": "^8.0.0"
     }
 }

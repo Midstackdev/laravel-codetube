@@ -17,6 +17,8 @@ Route::get('/search', 'SearchController@index')->name('search.inddex');
 
 Route::get('/videos/{video}/votes', 'VideoVoteController@show')->name('video.votes.show');
 
+Route::get('/videos/{video}/comments', 'VideoCommentController@index')->name('video.comments.index');
+
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
 Route::group(['middleware' => 'auth'], function() {
