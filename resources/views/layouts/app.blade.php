@@ -11,18 +11,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @if(Auth::check())
-        <script>
-            window.codetube = {
-                url: '{{ config('app.url') }}',
-                user: {
-                    id: {{ Auth::check() ? Auth::user()->id : null }},
-                    authenticated: {{ Auth::check() ? 'true' : 'false' }},
+    <script>
+        window.codetube = {
+            url: '{{ config('app.url') }}',
+            user: {
+                id: {{ Auth::check() ? Auth::user()->id : 'null' }},
+                authenticated: {{ Auth::check() ? 'true' : 'false' }},
 
-                }
             }
-        </script>
-    @endif
+        }
+    </script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

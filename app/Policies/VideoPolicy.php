@@ -42,4 +42,17 @@ class VideoPolicy
 
         return true;
     }
+
+    public function comment(User $user, Video $video)
+    {
+        if (!$video->canBeAccessed($user)) {
+            return false;
+        }
+
+        if (!$video->commentsAllowed()) {
+            return false;
+        }
+
+        return true;
+    }
 }

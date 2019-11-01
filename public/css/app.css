@@ -38,6 +38,14 @@
   color: #3097d1;
 }
 
+.video-comment {
+  margin-bottom: 10px;
+}
+
+.video-comment__input {
+  margin: 10px 0 10px 0;
+}
+
 .vjs-modal-dialog .vjs-modal-dialog-content,
 .video-js .vjs-modal-dialog,
 .vjs-button > .vjs-icon-placeholder:before,
