@@ -22,6 +22,9 @@
 						<li class="list-inline-item">
 							<a href="#" @click.prevent="toggleReplyForm(comment.id)">{{ replyFormVisible === comment.id ? 'Cancel' : 'Reply'}}</a>
 						</li>
+						<li class="list-inline-item">
+							<a href="#" v-if="$root.url.user.id === comment.user_id" @click.prevent="deleteCommet(comment.id)">Delete</a>
+						</li>
 					</ul>
 
 					<div class="video-comment clear" v-if="replyFormVisible === comment.id">
@@ -38,6 +41,11 @@
 						<div class="media-body">
 							<a :href="'/channel/' + reply.channel.slug" class="mt-0 mb-1">{{reply.channel.name}}</a> {{ reply.created_at_human}}
 							<p>{{ reply.body }}</p>
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a href="#" v-if="$root.url.user.id === reply.user_id" @click.prevent="deleteCommet(reply.id)">Delete</a>
+								</li>
+							</ul>
 						</div>
 					</div>
 					
@@ -106,6 +114,33 @@
 					.then(response => {
 						this.comments = response.data.data
 					})
+			},
+
+			deleteCommet (commentId) {
+				if (!confirm('Are you sure you want to delete this comment?')) {
+					return
+				}
+
+				this.deleteById(commentId)
+
+				axios.delete(`/videos/${this.videoUid}/comments/${commentId}`)
+			},
+
+			deleteById (commentId) {
+				this.comments.map((comment, index) => {
+					if (comment.id === commentId) {
+						this.comments.splice(index, 1)
+						return
+					}
+
+					comment.replies.map((reply, replyIndex) => {
+						if (reply.id === commentId) {
+							this.comments[index].replies.splice(replyIndex, 1)
+							return
+						}
+					})
+				})
+
 			}
 		},
 

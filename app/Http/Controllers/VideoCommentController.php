@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateVideoCommentRequest;
 use App\Http\Resources\VideoCommentsResource;
+use App\Models\Comment;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
@@ -25,5 +26,14 @@ class VideoCommentController extends Controller
     	]);
 
     	return new VideoCommentsResource($comment);
+    }
+
+    public function delete(Video $video, Comment $comment)
+    {
+    	$this->authorize('delete', $comment);
+
+    	$comment->delete();
+
+    	return response()->json(null, 200);
     }
 }

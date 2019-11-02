@@ -2540,6 +2540,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2596,6 +2604,33 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/videos/".concat(this.videoUid, "/comments")).then(function (response) {
         _this3.comments = response.data.data;
+      });
+    },
+    deleteCommet: function deleteCommet(commentId) {
+      if (!confirm('Are you sure you want to delete this comment?')) {
+        return;
+      }
+
+      this.deleteById(commentId);
+      axios["delete"]("/videos/".concat(this.videoUid, "/comments/").concat(commentId));
+    },
+    deleteById: function deleteById(commentId) {
+      var _this4 = this;
+
+      this.comments.map(function (comment, index) {
+        if (comment.id === commentId) {
+          _this4.comments.splice(index, 1);
+
+          return;
+        }
+
+        comment.replies.map(function (reply, replyIndex) {
+          if (reply.id === commentId) {
+            _this4.comments[index].replies.splice(replyIndex, 1);
+
+            return;
+          }
+        });
       });
     }
   },
@@ -94951,6 +94986,24 @@ var render = function() {
                           )
                         ]
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "list-inline-item" }, [
+                      _vm.$root.url.user.id === comment.user_id
+                        ? _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.deleteCommet(comment.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 : _vm._e(),
@@ -95027,7 +95080,27 @@ var render = function() {
                     _vm._v(
                       " " + _vm._s(reply.created_at_human) + "\n\t\t\t\t\t\t"
                     ),
-                    _c("p", [_vm._v(_vm._s(reply.body))])
+                    _c("p", [_vm._v(_vm._s(reply.body))]),
+                    _vm._v(" "),
+                    _c("ul", { staticClass: "list-inline" }, [
+                      _c("li", { staticClass: "list-inline-item" }, [
+                        _vm.$root.url.user.id === reply.user_id
+                          ? _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.deleteCommet(reply.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
                   ])
                 ])
               })
