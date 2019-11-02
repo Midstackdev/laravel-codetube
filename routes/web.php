@@ -1,9 +1,9 @@
 <?php
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -18,6 +18,7 @@ Route::get('/search', 'SearchController@index')->name('search.inddex');
 Route::get('/videos/{video}/votes', 'VideoVoteController@show')->name('video.votes.show');
 
 Route::get('/videos/{video}/comments', 'VideoCommentController@index')->name('video.comments.index');
+Route::get('/subscription/{channel}', 'ChannelSubscriptionController@show')->name('video.subscribe.show');
 
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
@@ -39,4 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('/videos/{video}/comments', 'VideoCommentController@create')->name('video.comments.create');
     Route::delete('/videos/{video}/comments/{comment}', 'VideoCommentController@delete')->name('video.comments.delete');
+
+    Route::post('/subscription/{channel}', 'ChannelSubscriptionController@create')->name('video.subscribe.create');
+    Route::delete('/subscription/{channel}', 'ChannelSubscriptionController@delete')->name('video.subscribe.delete');
 });
