@@ -17,6 +17,7 @@ Route::get('/videos/{video}/votes', 'VideoVoteController@show')->name('video.vot
 
 Route::get('/videos/{video}/comments', 'VideoCommentController@index')->name('video.comments.index');
 Route::get('/subscription/{channel}', 'ChannelSubscriptionController@show')->name('video.subscribe.show');
+Route::get('/channel/{channel}', 'ChannelController@show')->name('video.channel.show');
 
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 

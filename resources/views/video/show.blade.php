@@ -37,7 +37,10 @@
                         <div class="video__views">
                             {{ $video->viewCount() }} {{ Str::plural('view', $video->viewCount())}}
                         </div>
-                        <video-voting video-uid="{{ $video->uid }}"></video-voting>
+
+                        @if($video->votesAllowed())
+                            <video-voting video-uid="{{ $video->uid }}"></video-voting>
+                        @endif
                     </div>
 
                     <div class="media">

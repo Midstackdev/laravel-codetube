@@ -41,7 +41,7 @@
 						<div class="media-body">
 							<a :href="'/channel/' + reply.channel.slug" class="mt-0 mb-1">{{reply.channel.name}}</a> {{ reply.created_at_human}}
 							<p>{{ reply.body }}</p>
-							<ul class="list-inline">
+							<ul class="list-inline" v-if="$root.url.user.authenticated">
 								<li class="list-inline-item">
 									<a href="#" v-if="$root.url.user.id === reply.user_id" @click.prevent="deleteCommet(reply.id)">Delete</a>
 								</li>
@@ -91,6 +91,7 @@
 
 						if (comment.id === commentId) {
 							this.comments[index].replies.push(response.data.data)
+							return
 						}
 					})
 

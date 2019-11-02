@@ -32,4 +32,11 @@ class ChannelUpdateRequest extends FormRequest
             'image' => 'image|mimes:jpeg,jpg,gif,png,svg|max:2048'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'slug.unique' => 'That unique URL has already been taken.'
+        ];
+    }
 }

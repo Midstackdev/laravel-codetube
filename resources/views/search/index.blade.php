@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @if($channels->count())
                         <h4>Channels</h4>
-                        <div class="card">
+                        <div class="card mb-3">
                             @foreach($channels as $channel)
                                 <div class="card-body">
                                     <div class="media">
@@ -23,13 +23,17 @@
                                         <div class="media-body">
                                             <a href="/channel/{{ $channel->slug }}" class="h5">{{$channel->name}}</a>
                                             Subscribe count
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">{{ $channel->subscriptionCount() }} {{ Str::plural('subscriber', $channel->subscriptionCount()) }}</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     @endif
-
+                    
+                    <h4>Videos</h4>
                     @if($videos->count())
                         @foreach($videos as $video)
                             <div class="card">

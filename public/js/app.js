@@ -2647,6 +2647,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.comments.map(function (comment, index) {
           if (comment.id === commentId) {
             _this.comments[index].replies.push(response.data.data);
+
+            return;
           }
         });
 
@@ -95208,25 +95210,27 @@ var render = function() {
                     ),
                     _c("p", [_vm._v(_vm._s(reply.body))]),
                     _vm._v(" "),
-                    _c("ul", { staticClass: "list-inline" }, [
-                      _c("li", { staticClass: "list-inline-item" }, [
-                        _vm.$root.url.user.id === reply.user_id
-                          ? _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.deleteCommet(reply.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Delete")]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
+                    _vm.$root.url.user.authenticated
+                      ? _c("ul", { staticClass: "list-inline" }, [
+                          _c("li", { staticClass: "list-inline-item" }, [
+                            _vm.$root.url.user.id === reply.user_id
+                              ? _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.deleteCommet(reply.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Delete")]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      : _vm._e()
                   ])
                 ])
               })
@@ -95336,13 +95340,22 @@ var render = function() {
                         _vm._v(
                           "\n                          Your video will soon be available at "
                         ),
-                        _c("a", { attrs: { href: "", target: "_blank" } }, [
-                          _vm._v(
-                            _vm._s(_vm.$root.url.url) +
-                              "/videos/" +
-                              _vm._s(_vm.uid)
-                          )
-                        ])
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: _vm.$root.url.url + "/videos/" + _vm.uid,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              _vm._s(_vm.$root.url.url) +
+                                "/videos/" +
+                                _vm._s(_vm.uid)
+                            )
+                          ]
+                        )
                       ])
                     : _vm._e(),
                   _vm._v(" "),

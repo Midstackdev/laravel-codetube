@@ -24,6 +24,15 @@ class Video extends Model
 		'processing_percentage'
 	];
 
+    public function toSearchableArray()
+    {
+        $properties = $this->toArray();
+
+        $properties['visible'] = $this->isProcessed() && $this->isPublic();
+
+        return $properties;
+    }
+
     public function channel()
     {
     	return $this->belongsTo(Channel::class);
@@ -61,6 +70,11 @@ class Video extends Model
     public function isPrivate()
     {
         return $this->visibility === 'private';
+    }
+
+    public function isPublic()
+    {
+        return $this->visibility === 'public';
     }
 
     public function ownedByUser(User $user)
@@ -113,7 +127,7 @@ class Video extends Model
 
     public function voteFromUser(User $user)
     {
-        return $this->votes()->where('user_id', $user->id);
+        return $this->votes->where('user_id', $user->id);
     }
 
     public function comments()

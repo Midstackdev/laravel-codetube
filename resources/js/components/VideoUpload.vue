@@ -17,7 +17,7 @@
 
                         <div id="video-form" v-if="uploading && !failed">
                             <div class="alert alert-info" v-if="!uploadingComplete">
-                              Your video will soon be available at <a href="" target="_blank">{{$root.url.url}}/videos/{{uid}}</a>
+                              Your video will soon be available at <a :href="`${$root.url.url}/videos/${uid}`" target="_blank">{{$root.url.url}}/videos/{{uid}}</a>
                             </div>
                             <div class="alert alert-success" v-if="uploadingComplete">
                               Upload complete video is now processing <a href="/videos">Go to your videos</a>.
